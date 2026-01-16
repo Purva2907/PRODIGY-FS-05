@@ -34,6 +34,7 @@ tailwind.config.ts
 ```
 
 📦 Scripts
+
 Script	  Description
 ```
 dev	      Start dev server
