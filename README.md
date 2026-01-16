@@ -55,7 +55,3 @@ This project is open-source and free to use.
 
 
 ---
-
-If you want, I can also generate **Glamorous Markdown badges**, **Table of Contents**, or **screenshots and demo links** sections for each.
-::contentReference[oaicite:0]{index=0}.git
-cd PRODIGY-FS-05
