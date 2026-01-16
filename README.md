@@ -1,73 +1,60 @@
-# Welcome to your Lovable project
 
-## Project info
+---
+# PRODIGY_FS_05
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🎨 **Modern Web UI Project (React + TypeScript + Tailwind)**
 
-## How can I edit this code?
+This project is a modern front-end web app built with TypeScript, React, Vite, and Tailwind CSS. It’s a scaffolded template ready for feature expansion.
 
-There are several ways of editing your application.
+## 🛠 Built With
 
-**Use Lovable**
+- React  
+- TypeScript  
+- Tailwind CSS  
+- Vite
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Clone Repository
+```bash
+git clone https://github.com/Purva2907/PRODIGY-FS-05Install Dependencies
+bun install   # or `npm install` if you prefer
+```
+Run in Dev Mode
+bun run dev   # or `npm run dev`
 
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+🗂 Project Layout
+```
+src/                  # App source code
+public/               # Static public assets
+supabase/             # Backend configuration (if any)
+package.json
+vite.config.ts
+tailwind.config.ts
 ```
 
-**Edit a file directly in GitHub**
+📦 Scripts
+Script	  Description
+```
+dev	      Start dev server
+build  	  Production build
+preview 	Preview production build
+```
+📌 Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Deploy on platforms like Vercel or Netlify. Ensure environment configs (if any) are set during deployment.
 
-**Use GitHub Codespaces**
+ℹ️ Contributing
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Feel free to open issues and PRs. Follow best practices for commits.
 
-## What technologies are used for this project?
+📜 License
 
-This project is built with:
+This project is open-source and free to use.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+If you want, I can also generate **Glamorous Markdown badges**, **Table of Contents**, or **screenshots and demo links** sections for each.
+::contentReference[oaicite:0]{index=0}.git
+cd PRODIGY-FS-05
