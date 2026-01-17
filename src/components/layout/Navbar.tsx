@@ -1,8 +1,11 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Search, PlusSquare, Heart, User } from "lucide-react";
+import { Home, Search, PlusSquare, Heart, User, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { User as SupabaseUser } from "@supabase/supabase-js";
 
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
@@ -14,6 +17,25 @@ const navItems = [
 
 export function Navbar() {
   const location = useLocation();
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
 
   return (
     <>
@@ -59,10 +81,28 @@ export function Navbar() {
           })}
         </div>
 
-        <div className="pt-4 border-t border-border">
-          <Button className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 transition-opacity">
-            New Post
-          </Button>
+        <div className="pt-4 border-t border-border space-y-2">
+          {user ? (
+            <>
+              <Button className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 transition-opacity">
+                New Post
+              </Button>
+              <Button 
+                variant="ghost" 
+                onClick={handleLogout}
+                className="w-full text-muted-foreground hover:text-foreground"
+              >
+                Sign Out
+              </Button>
+            </>
+          ) : (
+            <Link to="/auth">
+              <Button className="w-full gradient-primary text-primary-foreground shadow-glow hover:opacity-90 transition-opacity">
+                <LogIn className="h-4 w-4 mr-2" />
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
       </nav>
 

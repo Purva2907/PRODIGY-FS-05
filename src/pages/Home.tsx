@@ -5,6 +5,12 @@ import { PostCard } from "@/components/post/PostCard";
 import { TrendingWidget } from "@/components/widgets/TrendingWidget";
 import { SuggestedUsersWidget } from "@/components/widgets/SuggestedUsersWidget";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { User } from "@supabase/supabase-js";
+import { Button } from "@/components/ui/button";
+import { LogIn } from "lucide-react";
 
 // Sample posts data
 const samplePosts = [
@@ -62,13 +68,53 @@ const samplePosts = [
 ];
 
 export default function Home() {
+  const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
+        setLoading(false);
+      }
+    );
+
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   return (
     <MainLayout>
       <div className="flex gap-6">
         {/* Main Feed */}
         <div className="flex-1 space-y-6">
+          {!user && !loading && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-6 border border-border"
+            >
+              <div className="flex items-center justify-between flex-wrap gap-4">
+                <div>
+                  <h2 className="text-lg font-semibold text-foreground">Welcome to Pulse!</h2>
+                  <p className="text-muted-foreground">Sign in to create posts and interact with the community.</p>
+                </div>
+                <Link to="/auth">
+                  <Button className="gradient-primary text-primary-foreground shadow-glow">
+                    <LogIn className="h-4 w-4 mr-2" />
+                    Sign In
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          )}
+          
           <StoriesRow />
-          <CreatePostCard userName="Guest" />
+          <CreatePostCard userName={user?.email?.split('@')[0] || "Guest"} />
           
           <motion.div className="space-y-6">
             {samplePosts.map((post, index) => (
